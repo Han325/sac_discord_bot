@@ -29,5 +29,8 @@ async def on_message(message):
   if message.content.startswith('$echo '):
     await message.reply(message.content[1:], mention_author=True)
 
+  if message.content.startswith('$s&p'):
+    await message.reply(message.content[1:], mention_author=True)
+
 
 client.run(TOKEN)

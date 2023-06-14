@@ -1,6 +1,10 @@
 import discord
 
 from settings import TOKEN
+from day_03.ex_02 import parse_price
+from day_03.ex_03 import parse_price_dynamic
+from day_03.ex_04 import get_weather
+from day_03.bonus import gen_joke
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -30,7 +34,20 @@ async def on_message(message):
     await message.reply(message.content[1:], mention_author=True)
 
   if message.content.startswith('$s&p'):
-    await message.reply(message.content[1:], mention_author=True)
+    price = parse_price()
+    await message.reply(price)
+
+  if message.content.startswith('$stock '):
+    price = parse_price_dynamic(message.content[7:])
+    await message.reply(price)
+
+  if message.content.startswith('$weather'):
+    weather = get_weather()
+    await message.reply(weather)
+
+  if message.content.startswith('$joke'):
+    joke = gen_joke()
+    await message.reply(joke)
 
 
 client.run(TOKEN)

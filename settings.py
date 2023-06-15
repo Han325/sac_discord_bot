@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 import os
 
-IS_REPL = True
+IS_REPL = False
 
 # load .env file
 

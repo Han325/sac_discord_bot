@@ -16,6 +16,12 @@ from day_04.ex_03 import get_crypto_price_dynamic
 from day_04.ex_04 import get_random_malaysia_news
 from day_04.ex_05 import get_random_global_news
 
+#day 5 exercises
+from day_05.ex_01 import write_to_csv
+from day_05.ex_02 import read_from_csv
+from day_05.ex_03 import analyze
+from day_05.ex_04 import show_restaurants, vote
+
 intents = discord.Intents.default()
 intents.message_content = True
 
@@ -77,6 +83,31 @@ async def on_message(message):
   if message.content.startswith('$news '):
     news_url = get_random_global_news(message.content[6:])
     await message.reply(news_url)
+
+  if message.content.startswith('$write '):
+    write_to_csv(message.content[7:])
+    await message.reply("Written!")
+
+  if message.content.startswith('$read'):
+     reader = read_from_csv()
+
+     for row in reader:
+        await message.reply(row[0])
+
+  if message.content.startswith('$analyze'):
+     result = analyze()
+
+     await message.reply(result)
+
+  if message.content.startswith('$vote_list'):
+     reader = show_restaurants()
+     await message.reply("You may choose to vote for")
+     for row in reader:
+        await message.write(row[0])
+
+  if message.content.startswith('$vote '):
+     vote_restaurant = vote(message.content[6:])
+     await message.reply("You have voted for " + message.content[6:])
 
 
 client.run(TOKEN)

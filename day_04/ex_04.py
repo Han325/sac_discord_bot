@@ -10,7 +10,9 @@ def get_random_malaysia_news():
 
     response = requests.get(url, params=params)
     news = response.json()
+    print(news["articles"])
 
     article = random.choice(news['articles'])
 
     return article['url']
+get_random_malaysia_news()
